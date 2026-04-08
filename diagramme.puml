@@ -1,0 +1,36 @@
+Fichier : c1-context.puml
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagramme de contexte C1 — MyToDo
+
+' ── Acteurs humains ──────────────────────────────
+Person(user,   "Utilisateur",   "Gère ses tâches personnelles")
+Person(admin,  "Admin",          "Gère les groupes et attribue des tâches")
+Person(collab, "Collaborateur", "Travaille dans un groupe, soumet des tâches")
+
+' ── Système central ──────────────────────────────
+System(mytodo, "MyToDo", "Application web de gestion de tâches")
+
+' ── Systèmes externes ────────────────────────────
+System_Ext(email, "Service Email", "Envoie confirmations et notifications")
+
+' ── Relations : Utilisateur → MyToDo ─────────────
+Rel(user, mytodo, "Crée un compte, se connecte",         "HTTPS / UC1-UC2")
+Rel(user, mytodo, "Ajoute, modifie, supprime des tâches",  "HTTPS / UC4-UC6")
+Rel(user, mytodo, "Marque terminée, organise, priorise",   "HTTPS / UC7-UC9")
+
+' ── Relations : Admin → MyToDo ───────────────────
+Rel(admin, mytodo, "Crée un groupe d'utilisateurs",         "HTTPS / UC10")
+Rel(admin, mytodo, "Attribue une tâche à un collaborateur", "HTTPS / UC11")
+
+' ── Relations : Collaborateur → MyToDo ───────────
+Rel(collab, mytodo, "Soumet une tâche à l'admin", "HTTPS / UC12")
+
+' ── Relations : MyToDo → Systèmes externes ───────
+Rel(mytodo, email, "Envoie des notifications", "SMTP")
+
+@enduml
+

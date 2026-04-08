@@ -1,0 +1,15 @@
+@startuml
+title Contexte C1 - MyToDo
+
+actor "Utilisateur" as User
+actor "Administrateur" as Admin
+rectangle "MyToDo\n(Application de gestion de tâches)" as MyToDo {
+}
+
+rectangle "Service d'emailing\n[Système externe]" as Email
+
+User --> MyToDo : Gère ses tâches\nConsulte ses informations
+MyToDo --> Email : Envoie des emails\n(confirmations, rappels)
+Admin --> MyToDo : Gère les comptes\nutilisateurs
+
+@enduml
