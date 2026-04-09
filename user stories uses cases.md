@@ -1,4 +1,8 @@
 
+
+
+
+
 ## User Stories
 
 1. En tant qu’utilisateur, 
@@ -66,5 +70,3 @@ afin de lui suggérer une nouvelle tâche à soumettre au groupe.
 | UC11 | Attribuer une tâche à un collaborateur   | Admin       |
 | UC12 | Soummettre une tâche à l'administrateur  | Collaborateur|
 
-## diagramme de contexte C1
-![alt text](image.png)
