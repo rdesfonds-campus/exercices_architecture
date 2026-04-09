@@ -1,4 +1,7 @@
 @startuml
+!include ./C4_Context.puml
+
+@startuml
 title Contexte C1 - MyToDo
 
 actor "Utilisateur" as User

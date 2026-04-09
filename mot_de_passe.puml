@@ -1,0 +1,42 @@
+@startuml
+title Réinitialisation du mot de passe - MyToDo
+
+actor Utilisateur
+participant "Front-end" as FE
+participant "Authentification (externe)" as Auth
+participant "Service email (externe)" as Mail
+
+Utilisateur -> FE : Clique sur "Mot de passe oublié"
+
+FE -> Auth : POST /reset-password {email}
+Auth -> Mail : Génère un token de reset\nEnvoie email avec lien de reset
+Mail --> Utilisateur : Email reçu avec lien de reset
+
+Utilisateur -> FE : Clique sur le lien de reset
+FE -> Auth : POST /reset-password/confirm {token, newPassword}
+Auth -> Auth : Met à jour le mot de passe
+Auth --> Utilisateur : 200 OK\n"Mot de passe mis à jour, redirige vers login"\nEmail confirmation de réinitialisation
+
+
+alt Format email invalide
+  FE --> Utilisateur : "Invalid email format"
+else Format email valide
+  FE -> Auth : POST /reset-password {email}
+  Auth -> Mail : Génère un token de reset\nEnvoie email avec lien de reset
+  Mail --> Utilisateur : Email reçu avec lien de reset
+end
+
+Utilisateur -> FE : Clique sur le lien de reset
+FE -> Auth : POST /reset-password/confirm {token, newPassword}
+
+alt Token valide
+  Auth -> Auth : Met à jour le mot de passe
+  Auth --> Utilisateur : 200 OK\n"Mot de passe mis à jour, redirige vers login"\nEmail confirmation de réinitialisation
+else Token invalide ou expiré
+  Auth --> Utilisateur : 400 Bad Request\n"Lien invalide ou expiré"
+end
+
+
+
+@enduml
+
