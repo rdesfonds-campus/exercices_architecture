@@ -1,0 +1,27 @@
+@startuml exercice2_myshop
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Diagramme C2 — MyShop (Stack Java)
+
+Person(user, "Utilisateur", "Consulte et commande des produits")
+Person(admin, "Administrateur", "Gère le catalogue et les commandes")
+
+System_Boundary(myshop, "MyShop [Système]") {
+    Container(fe, "Front-end Web", "Angular", "Interface client et back-office")
+    Container(api, "API Back-end", "Spring Boot", "Logique métier et REST")
+    ContainerDb(db, "Base de données", "MySQL", "Produits, commandes, utilisateurs")
+    Container(store, "Stockage fichiers", "MinIO / S3", "Images des produits")
+}
+
+System(mail, "Service Email", "SendGrid")
+System(pay, "Paiement", "Stripe")
+
+Rel(user, fe, "Utilise", "HTTPS")
+Rel(admin, fe, "Administre", "HTTPS")
+Rel(fe, api, "Appelle", "HTTP/JSON — REST")
+Rel(api, db, "Lit / Écrit", "JDBC / TCP")
+Rel(api, store, "Upload / Récupère", "HTTPS — S3 API")
+Rel(api, mail, "Envoie des emails", "HTTPS — API REST")
+Rel(api, pay, "Initie les paiements", "HTTPS — API REST")
+
+@enduml

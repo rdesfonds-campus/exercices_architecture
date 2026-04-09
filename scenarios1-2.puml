@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant U as Utilisateur
+    participant FE as Front-end
+    participant API as API Back-end
+    participant DB as Base de données
+    U->>FE: Remplit le formulaire "Nouvelle tâche"
+    FE->>FE: Validation côté client
+    FE->>API: POST /api/tasks {title, dueDate, category}
+    API->>API: Validation + Authentification
+    API->>DB: INSERT INTO tasks (...)
+    DB-->>API: OK (id: 123)
+    API-->>FE: 201 Created {task}
+    FE-->>U: Affiche la nouvelle tâche
+
+    

@@ -37,4 +37,4 @@ Cas d'utilisation : description structurée d'une interaction entre un acteur et
 > **Différence clé :** la User Story dit *quoi* et *pourquoi* ; le Use Case décrit *comment* le système répond étape par étape.
 
 ## diagramme de contexte C1
-![alt text](image.png)
+![alt text](../image.png)

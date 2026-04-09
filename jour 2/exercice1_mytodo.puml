@@ -1,0 +1,24 @@
+@startuml exercice1_mytodo
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Diagramme C2 — MyToDo (enrichi avec Redis)
+
+Person(user, "Utilisateur", "Gère ses tâches")
+
+System_Boundary(mytodo, "MyToDo [Système]") {
+    Container(fe, "Front-end Web", "React", "Interface utilisateur")
+    Container(api, "API Back-end", "Node.js / Express", "Logique métier")
+    ContainerDb(db, "Base de données", "PostgreSQL", "Stockage des tâches et utilisateurs")
+    Container(cache, "Cache", "Redis", "Cache des requêtes fréquentes et sessions")
+}
+
+System(email, "Service Email", "SendGrid")
+
+Rel(user, fe, "Utilise", "HTTPS")
+Rel(fe, api, "Appelle", "HTTP/JSON")
+Rel(api, cache, "Lit / Écrit", "Redis Protocol / TCP")
+Rel(api, db, "Lit / Écrit", "SQL / TCP")
+Rel(api, email, "Envoie des emails", "API REST / HTTPS")
+Rel(cache, db, "Cache miss → fallback", "SQL / TCP", $tags="optional")
+
+@enduml
