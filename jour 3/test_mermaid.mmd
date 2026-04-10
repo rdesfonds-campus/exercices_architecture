@@ -1,0 +1,27 @@
+flowchart LR
+  U[Utilisateur]
+
+  subgraph MyToDo - Système
+    FE[Front-end Web]
+    API[API Back-end]
+    DB[(Base de données)]
+    EMAIL[Service email (externe)]
+    PUSH[Service de notifications push]
+  end
+
+  U --> FE
+  FE --> API
+  API --> DB
+  API --> EMAIL
+  API --> PUSH
+
+  sequenceDiagram
+  participant U as Utilisateur
+  participant FE as Front-end
+  participant AUTH as Authentification
+  participant MAIL as Service email
+
+  U->>FE: Clique sur "Mot de passe oublié"
+  FE->>AUTH: POST /reset-password {email}
+  AUTH->>MAIL: Envoie email avec lien de reset
+  MAIL-->>U: Email reçu avec lien de reset
