@@ -2,8 +2,8 @@
 title Réinitialisation du mot de passe - MyToDo
 
 actor Utilisateur
-participant "Front-end" as FE
-participant "Authentification (externe)" as Auth
+participant "Front-end - Vue.js" as FE
+participant "API Back-end " as Auth
 participant "Service email (externe)" as Mail
 
 Utilisateur -> FE : Clique sur "Mot de passe oublié"
@@ -35,8 +35,6 @@ alt Token valide
 else Token invalide ou expiré
   Auth --> Utilisateur : 400 Bad Request\n"Lien invalide ou expiré"
 end
-
-
 
 @enduml
 

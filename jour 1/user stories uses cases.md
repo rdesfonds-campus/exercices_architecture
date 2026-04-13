@@ -1,8 +1,4 @@
 
-
-
-
-
 ## User Stories
 
 1. En tant qu’utilisateur, 

@@ -37,4 +37,22 @@ Cas d'utilisation : description structurée d'une interaction entre un acteur et
 > **Différence clé :** la User Story dit *quoi* et *pourquoi* ; le Use Case décrit *comment* le système répond étape par étape.
 
 ## diagramme de contexte C1
-![alt text](../image.png)
+
+```mermaid
+graph TD
+    U["👤 Utilisateur"]
+    A["👤 Admin"]
+    C["👤 Collaborateur"]
+
+    S["💻 MyToDo<br/>Application de gestion de tâches"]
+
+    E["⚙️ Service Email<br/>[Système externe]"]
+    N["⚙️ Notification Service<br/>[Système externe]"]
+
+    U -- "Créé un compte" --> S
+    U -- "Gère ses tâches" --> S
+    A -- "Gère les groupes et les attributions" --> S
+    C -- "Soumet des tâches" --> S
+
+    S -- "Envoie des emails" --> E
+    S -- "Envoie des notifications" --> N
