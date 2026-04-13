@@ -1,0 +1,29 @@
+```mermaid
+classDiagram
+    class User {
+        +int id
+        +string email
+        +string password
+        +string name
+        +datetime createdAt
+        +checkPassword(password) bool
+        +getTasks() Task[]
+    }
+    class Task {
+        +int id
+        +string title
+        +string description
+        +datetime dueDate
+        +string status
+        +markAsComplete() void
+        +isOverdue() bool
+    }
+    class Category {
+        +int id
+        +string name
+        +string color
+        +getTasks() Task[]
+    }
+    User "1" --> "*" Task : owns
+    User "1" --> "*" Category : has
+    Category "1" --> "*" Task : contains
