@@ -78,10 +78,10 @@ graph LR
 ```mermaid
 sequenceDiagram
     participant U as Utilisateur
-    participant FE as Front-end
-    participant API as API Back-end
+    participant FE as Front-end - React
+    participant API as API Back-end - Node.js / express
     participant CACHE as Redis
-    participant DB as Base de données
+    participant DB as Base de données -PSQL
 
     U->>FE: Modifie le titre et la date d'une tâche
     FE->>FE: Validation côté client
@@ -102,10 +102,10 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant U as Utilisateur
-    participant FE as Front-end
-    participant API as API Back-end
+    participant FE as Front-end - React
+    participant API as API Back-end - Node.js / express
     participant CACHE as Redis
-    participant DB as Base de données
+    participant DB as Base de données -PSQL
 
     U->>FE: Accède au tableau de bord statistiques
     FE->>API: GET /api/stats
@@ -130,8 +130,8 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant U as Utilisateur
-    participant FE as Front-end
-    participant API as API Back-end
+    participant FE as Front-end - React
+    participant API as API Back-end - Node.js / Express
     participant DB as Base de données
     participant MAIL as SendGrid
 
